@@ -82,7 +82,7 @@ X = [ones(m, 1) X];
 fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
-alpha = 0.01;
+alpha = 1.25;
 num_iters = 400;
 
 % Init Theta and Run Gradient Descent 
@@ -104,15 +104,21 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
-mu
-sigma
-price = [1, ([1650, 3] - mu) ./ sigma] * theta;
+price1 = [1, (([1600, 3] - mu) ./ sigma)] * theta;
+price2 = [1, (([1650, 3] - mu) ./ sigma)] * theta;
+price3 = [1, (([1700, 3] - mu) ./ sigma)] * theta;
 
 
 % ============================================================
 
+fprintf(['Predicted price of a 1600 sq-ft, 3 br house ' ...
+         '(using gradient descent):\n $%f\n'], price1);
+
 fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
-         '(using gradient descent):\n $%f\n'], price);
+         '(using gradient descent):\n $%f\n'], price2);
+
+fprintf(['Predicted price of a 1700 sq-ft, 3 br house ' ...
+         '(using gradient descent):\n $%f\n'], price3);
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
@@ -151,11 +157,21 @@ fprintf('\n');
 
 % Estimate the price of a 1650 sq-ft, 3 br house
 % ====================== YOUR CODE HERE ======================
-price = 0; % You should change this
+price1 = [1, 1600, 3] * theta;
+price2 = [1, 1650, 3] * theta;
+price3 = [1, 1700, 3] * theta;
 
 
 % ============================================================
 
+fprintf(['Predicted price of a 1600 sq-ft, 3 br house ' ...
+         '(using normal equations):\n $%f\n'], price1);
+
+
 fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
-         '(using normal equations):\n $%f\n'], price);
+         '(using normal equations):\n $%f\n'], price2);
+
+
+fprintf(['Predicted price of a 1700 sq-ft, 3 br house ' ...
+         '(using normal equations):\n $%f\n'], price3);
 

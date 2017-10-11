@@ -27,7 +27,7 @@ sigma = zeros(1, size(X, 2));
 %       
 
 mu = mean(X);
-sigma = max(X) - min(X);
+sigma = std(X);
 for iter = 1:size(X, 1)
 	X_norm(iter, :) = (X(iter, :) - mu) ./ sigma;
 end
