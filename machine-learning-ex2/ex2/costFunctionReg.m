@@ -17,19 +17,18 @@ grad = zeros(size(theta));
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
 
-%thetaForRegularization = [theta(:, 1), pow2(theta(:, 2:size(theta, 2)))];
-regularizationTerm = (lambda / (2 * m)) * sum(pow2(theta(2:size(theta))));
-J = sum((1 / m) * (((-y)' * log(sigmoid(X * theta)) - ((1 - y)' * log(1 - sigmoid((X * theta))))) + regularizationTerm));		% Regularization term
+regularizationTerm = (lambda / (2 * m)) * sum(theta(2:size(theta)) .^ 2);
 
+H =sigmoid(X * theta);
 
-%grad(1) = (1 / m) * (X(:, 1)' * (sigmoid(X(:, 1) * theta(1)) - y));
-%grad(2:size(grad)) = ((1 / m) * (X(:, 2:size(X, 2))' * (sigmoid(X(:, 2:size(X, 2)) * theta(2:size(theta))) - y))) +...
-%	(lambda / m * theta(2:size(theta)));							% Regularization term
+J = -(1 / m * sum((y' * log(H) + (1 - y)' * log(1 - H)))) + regularizationTerm;	
 
+% Alternative comp
 %for i = 1:m
-%	J += (1 / m) * (((-y(i)) * log(sigmoid(X(i, :) * theta)) - ((1 - y(i)) * log(1 - sigmoid((X(i, :) * theta))))) + regularizationTerm);
+%	J += y(i) * log(H(i)) + (1 - y(i)) * log(1 - H(i));
 %end
-	
+%	
+%J = -(1 / m * J) + regularizationTerm;
 
 for i = 1:m
 	grad(1) = grad(1) + (1 / m) * (sigmoid(X(i, :) * theta) - y(i)) * X(i, 1);	
