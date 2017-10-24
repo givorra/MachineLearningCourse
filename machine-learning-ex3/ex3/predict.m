@@ -21,13 +21,21 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+% Add ones to the X data matrix
+X = [ones(m, 1) X];
 
 
+A2 = zeros(0, 0);
+A3 = zeros(0, 0);
+for i = 1:size(Theta1, 1)
+	A2 = [A2 sigmoid(X * Theta1(i, :)')];
+end
+A2 = [ones(size(A2, 1), 1) A2];
+for i = 1:num_labels
+	A3 = [A3 sigmoid(A2 * Theta2(i, :)')];
+end
 
-
-
-
-
+[probability, p] = max(A3, [], 2);
 
 % =========================================================================
 
