@@ -29,11 +29,13 @@ X = [ones(m, 1) X];
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
 %       
+predictions = zeros(0, 0);
+for i = 1:num_labels
+	H = sigmoid(X * all_theta(i, :)');
+	predictions = [predictions H];
+end
 
-
-
-
-
+[probability, p] = max(predictions, [], 2);
 
 
 % =========================================================================
